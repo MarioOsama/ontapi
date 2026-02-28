@@ -44,9 +44,9 @@
 
 ### Implementation for User Story 1
 
-- [ ] T008 [P] [US1] Create `tenant_users` table with columns: `id` (uuid PK, default `gen_random_uuid()`), `tenant_id` (uuid FK → tenants.id ON DELETE RESTRICT, NOT NULL), `user_id` (uuid FK → auth.users.id ON DELETE CASCADE, NOT NULL), `role` (text NOT NULL, CHECK IN ('tenant_admin')), UNIQUE(`tenant_id`, `user_id`) in `supabase/migrations/001_database_foundation.sql`
-- [ ] T009 [P] [US1] Create `branch_users` table with columns: `id` (uuid PK, default `gen_random_uuid()`), `branch_id` (uuid FK → branches.id ON DELETE RESTRICT, NOT NULL), `user_id` (uuid FK → auth.users.id ON DELETE CASCADE, NOT NULL), `role` (text NOT NULL, CHECK IN ('branch_manager', 'branch_staff')), UNIQUE(`branch_id`, `user_id`) in `supabase/migrations/001_database_foundation.sql`
-- [ ] T010 [P] [US1] Create indexes on `tenant_users.tenant_id`, `tenant_users.user_id`, `branch_users.branch_id`, `branch_users.user_id` in `supabase/migrations/001_database_foundation.sql`
+- [x] T008 [P] [US1] Create `tenant_users` table with columns: `id` (uuid PK, default `gen_random_uuid()`), `tenant_id` (uuid FK → tenants.id ON DELETE RESTRICT, NOT NULL), `user_id` (uuid FK → auth.users.id ON DELETE CASCADE, NOT NULL), `role` (text NOT NULL, CHECK IN ('tenant_admin')), UNIQUE(`tenant_id`, `user_id`) in `supabase/migrations/001_database_foundation.sql`
+- [x] T009 [P] [US1] Create `branch_users` table with columns: `id` (uuid PK, default `gen_random_uuid()`), `branch_id` (uuid FK → branches.id ON DELETE RESTRICT, NOT NULL), `user_id` (uuid FK → auth.users.id ON DELETE CASCADE, NOT NULL), `role` (text NOT NULL, CHECK IN ('branch_manager', 'branch_staff')), UNIQUE(`branch_id`, `user_id`) in `supabase/migrations/001_database_foundation.sql`
+- [x] T010 [P] [US1] Create indexes on `tenant_users.tenant_id`, `tenant_users.user_id`, `branch_users.branch_id`, `branch_users.user_id` in `supabase/migrations/001_database_foundation.sql`
 
 **Checkpoint**: User Story 1 complete — tenant onboarding data model fully operational
 
@@ -60,8 +60,8 @@
 
 ### Implementation for User Story 2
 
-- [ ] T011 [US2] Create `orders` table with columns: `id` (uuid PK, default `gen_random_uuid()`), `tenant_id` (uuid FK → tenants.id ON DELETE CASCADE, NOT NULL), `branch_id` (uuid FK → branches.id ON DELETE CASCADE, NOT NULL), `order_number` (text NOT NULL), `status` (text NOT NULL DEFAULT 'waiting', CHECK IN ('waiting', 'in_progress', 'done', 'cancelled')), `source` (text NOT NULL, CHECK IN ('manual', 'api')), `created_at` (timestamptz NOT NULL, default `now()`), `started_at` (timestamptz), `completed_at` (timestamptz) in `supabase/migrations/001_database_foundation.sql`
-- [ ] T012 [P] [US2] Create indexes on `orders.tenant_id` and `orders.branch_id` in `supabase/migrations/001_database_foundation.sql`
+- [x] T011 [US2] Create `orders` table with columns: `id` (uuid PK, default `gen_random_uuid()`), `tenant_id` (uuid FK → tenants.id ON DELETE CASCADE, NOT NULL), `branch_id` (uuid FK → branches.id ON DELETE CASCADE, NOT NULL), `order_number` (text NOT NULL), `status` (text NOT NULL DEFAULT 'waiting', CHECK IN ('waiting', 'in_progress', 'done', 'cancelled')), `source` (text NOT NULL, CHECK IN ('manual', 'api')), `created_at` (timestamptz NOT NULL, default `now()`), `started_at` (timestamptz), `completed_at` (timestamptz) in `supabase/migrations/001_database_foundation.sql`
+- [x] T012 [P] [US2] Create indexes on `orders.tenant_id` and `orders.branch_id` in `supabase/migrations/001_database_foundation.sql`
 
 **Checkpoint**: User Story 2 complete — order lifecycle tracking fully operational
 
@@ -75,10 +75,10 @@
 
 ### Implementation for User Story 3
 
-- [ ] T013 [P] [US3] Create `offers` table with columns: `id` (uuid PK, default `gen_random_uuid()`), `tenant_id` (uuid FK → tenants.id ON DELETE CASCADE, NOT NULL), `title` (text NOT NULL), `description` (text), `image_url` (text), `is_global` (boolean NOT NULL DEFAULT false), `is_active` (boolean NOT NULL DEFAULT true), `created_at` (timestamptz NOT NULL, default `now()`), `updated_at` (timestamptz NOT NULL, default `now()`) in `supabase/migrations/001_database_foundation.sql`
-- [ ] T014 [US3] Create `moddatetime` trigger on `offers` to auto-update `updated_at` in `supabase/migrations/001_database_foundation.sql`
-- [ ] T015 [US3] Create `branch_offers` junction table with columns: `id` (uuid PK, default `gen_random_uuid()`), `branch_id` (uuid FK → branches.id ON DELETE CASCADE, NOT NULL), `offer_id` (uuid FK → offers.id ON DELETE CASCADE, NOT NULL), UNIQUE(`branch_id`, `offer_id`) in `supabase/migrations/001_database_foundation.sql`
-- [ ] T016 [P] [US3] Create indexes on `offers.tenant_id`, `branch_offers.branch_id`, `branch_offers.offer_id` in `supabase/migrations/001_database_foundation.sql`
+- [x] T013 [P] [US3] Create `offers` table with columns: `id` (uuid PK, default `gen_random_uuid()`), `tenant_id` (uuid FK → tenants.id ON DELETE CASCADE, NOT NULL), `title` (text NOT NULL), `description` (text), `image_url` (text), `is_global` (boolean NOT NULL DEFAULT false), `is_active` (boolean NOT NULL DEFAULT true), `created_at` (timestamptz NOT NULL, default `now()`), `updated_at` (timestamptz NOT NULL, default `now()`) in `supabase/migrations/001_database_foundation.sql`
+- [x] T014 [US3] Create `moddatetime` trigger on `offers` to auto-update `updated_at` in `supabase/migrations/001_database_foundation.sql`
+- [x] T015 [US3] Create `branch_offers` junction table with columns: `id` (uuid PK, default `gen_random_uuid()`), `branch_id` (uuid FK → branches.id ON DELETE CASCADE, NOT NULL), `offer_id` (uuid FK → offers.id ON DELETE CASCADE, NOT NULL), UNIQUE(`branch_id`, `offer_id`) in `supabase/migrations/001_database_foundation.sql`
+- [x] T016 [P] [US3] Create indexes on `offers.tenant_id`, `branch_offers.branch_id`, `branch_offers.offer_id` in `supabase/migrations/001_database_foundation.sql`
 
 **Checkpoint**: User Story 3 complete — offer management data model fully operational
 
@@ -92,9 +92,9 @@
 
 ### Implementation for User Story 4
 
-- [ ] T017 [P] [US4] Create `subscriptions` table with columns: `id` (uuid PK, default `gen_random_uuid()`), `tenant_id` (uuid FK → tenants.id ON DELETE CASCADE, NOT NULL), `plan_name` (text NOT NULL), `monthly_order_limit` (int NOT NULL), `current_period_start` (date NOT NULL), `current_period_end` (date NOT NULL), `is_active` (boolean NOT NULL DEFAULT true), `created_at` (timestamptz NOT NULL, default `now()`) in `supabase/migrations/001_database_foundation.sql`
-- [ ] T018 [P] [US4] Create `usage_tracking` table with columns: `id` (uuid PK, default `gen_random_uuid()`), `tenant_id` (uuid FK → tenants.id ON DELETE CASCADE, NOT NULL), `month` (text NOT NULL), `orders_count` (int NOT NULL DEFAULT 0), UNIQUE(`tenant_id`, `month`) in `supabase/migrations/001_database_foundation.sql`
-- [ ] T019 [P] [US4] Create indexes on `subscriptions.tenant_id` and `usage_tracking.tenant_id` in `supabase/migrations/001_database_foundation.sql`
+- [x] T017 [P] [US4] Create `subscriptions` table with columns: `id` (uuid PK, default `gen_random_uuid()`), `tenant_id` (uuid FK → tenants.id ON DELETE CASCADE, NOT NULL), `plan_name` (text NOT NULL), `monthly_order_limit` (int NOT NULL), `current_period_start` (date NOT NULL), `current_period_end` (date NOT NULL), `is_active` (boolean NOT NULL DEFAULT true), `created_at` (timestamptz NOT NULL, default `now()`) in `supabase/migrations/001_database_foundation.sql`
+- [x] T018 [P] [US4] Create `usage_tracking` table with columns: `id` (uuid PK, default `gen_random_uuid()`), `tenant_id` (uuid FK → tenants.id ON DELETE CASCADE, NOT NULL), `month` (text NOT NULL), `orders_count` (int NOT NULL DEFAULT 0), UNIQUE(`tenant_id`, `month`) in `supabase/migrations/001_database_foundation.sql`
+- [x] T019 [P] [US4] Create indexes on `subscriptions.tenant_id` and `usage_tracking.tenant_id` in `supabase/migrations/001_database_foundation.sql`
 
 **Checkpoint**: User Story 4 complete — subscription and usage tracking fully operational
 
@@ -108,8 +108,8 @@
 
 ### Implementation for User Story 5
 
-- [ ] T020 [US5] Create `ratings` table with columns: `id` (uuid PK, default `gen_random_uuid()`), `tenant_id` (uuid FK → tenants.id ON DELETE CASCADE, NOT NULL), `branch_id` (uuid FK → branches.id ON DELETE CASCADE, NOT NULL), `order_id` (uuid FK → orders.id ON DELETE CASCADE, NOT NULL, UNIQUE), `rating` (int NOT NULL, CHECK (rating >= 1 AND rating <= 5)), `feedback` (text), `created_at` (timestamptz NOT NULL, default `now()`) in `supabase/migrations/001_database_foundation.sql`
-- [ ] T021 [P] [US5] Create indexes on `ratings.tenant_id` and `ratings.branch_id` in `supabase/migrations/001_database_foundation.sql`
+- [x] T020 [US5] Create `ratings` table with columns: `id` (uuid PK, default `gen_random_uuid()`), `tenant_id` (uuid FK → tenants.id ON DELETE CASCADE, NOT NULL), `branch_id` (uuid FK → branches.id ON DELETE CASCADE, NOT NULL), `order_id` (uuid FK → orders.id ON DELETE CASCADE, NOT NULL, UNIQUE), `rating` (int NOT NULL, CHECK (rating >= 1 AND rating <= 5)), `feedback` (text), `created_at` (timestamptz NOT NULL, default `now()`) in `supabase/migrations/001_database_foundation.sql`
+- [x] T021 [P] [US5] Create indexes on `ratings.tenant_id` and `ratings.branch_id` in `supabase/migrations/001_database_foundation.sql`
 
 **Checkpoint**: User Story 5 complete — all 10 tables created
 
@@ -119,14 +119,14 @@
 
 **Purpose**: Validation, verification, and documentation
 
-- [ ] T022 Run full migration on a fresh Supabase database and verify zero errors in `supabase/migrations/001_database_foundation.sql`
-- [ ] T023 [P] Validate all 10 tables exist via `information_schema.tables` query in Supabase SQL Editor
-- [ ] T024 [P] Validate all CHECK constraints by inserting invalid data (bad status, bad source, bad rating, negative duration)
-- [ ] T025 [P] Validate all UNIQUE constraints by inserting duplicate records (tenant_users, branch_users, usage_tracking month, branch_offers, ratings order_id)
-- [ ] T026 Validate CASCADE behavior: insert tenant → branch → orders → ratings, then delete tenant and verify all child data removed
-- [ ] T027 Validate RESTRICT behavior: insert tenant → tenant_user, attempt to delete tenant and verify it is blocked until user mapping removed
-- [ ] T028 [P] Validate all indexes exist via `pg_indexes` query
-- [ ] T029 Run quickstart.md test scenarios to verify end-to-end in Supabase SQL Editor
+- [x] T022 Run full migration on a fresh Supabase database and verify zero errors in `supabase/migrations/20260228101405_database_foundation.sql`
+- [x] T023 [P] Validate all 10 tables exist via `information_schema.tables` query in Supabase SQL Editor
+- [x] T024 [P] Validate all CHECK constraints by inserting invalid data (bad status, bad source, bad rating, negative duration)
+- [x] T025 [P] Validate all UNIQUE constraints by inserting duplicate records (tenant_users, branch_users, usage_tracking month, branch_offers, ratings order_id)
+- [x] T026 Validate CASCADE behavior: insert tenant → branch → orders → ratings, then delete tenant and verify all child data removed
+- [x] T027 Validate RESTRICT behavior: insert tenant → tenant_user, attempt to delete tenant and verify it is blocked until user mapping removed
+- [x] T028 [P] Validate all indexes exist via `pg_indexes` query
+- [x] T029 Run quickstart.md test scenarios to verify end-to-end in Supabase SQL Editor
 
 ---
 
