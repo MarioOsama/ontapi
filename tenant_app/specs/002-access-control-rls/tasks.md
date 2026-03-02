@@ -218,6 +218,13 @@ T025  ratings_tenant_admin_select               ← parallel
 
 ---
 
+## Phase 9: Deployment & Submission
+
+- [x] T048 Push changes to GitHub and create a Pull Request via GitHub CLI (`gh pr create`)
+- [x] T049 Verify all Phase 2 implementation summary and audit reports are finalized and linked
+
+---
+
 ## Summary
 
 | Phase | User Story | Tasks | Policies/Objects Added |
