@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tenant_app/features/auth/logic/auth_state.dart' show AuthError;
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_text_styles.dart';
 import '../../logic/auth_cubit.dart';
 import 'auth_header.dart';
 import 'auth_input_field.dart';
 import 'auth_primary_button.dart';
 
 class RightPaneStageOne extends StatefulWidget {
-  const RightPaneStageOne({super.key});
+  final VoidCallback onSignInTap;
+  final bool isLoading;
+
+  const RightPaneStageOne({
+    super.key,
+    required this.onSignInTap,
+    this.isLoading = false,
+  });
 
   @override
   State<RightPaneStageOne> createState() => RightPaneStageOneState();
@@ -30,9 +40,13 @@ class RightPaneStageOneState extends State<RightPaneStageOne> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isError = context.read<AuthCubit>().state is AuthError;
     return Container(
       constraints: const BoxConstraints(maxWidth: 480),
-      padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 48.0),
+      padding: EdgeInsets.symmetric(
+        horizontal: 32.0,
+        vertical: isError ? 0.0 : 48.0,
+      ),
       child: Form(
         key: _formKey,
         child: Column(
@@ -81,6 +95,30 @@ class RightPaneStageOneState extends State<RightPaneStageOne> {
               text: 'Continue',
               icon: Icons.arrow_forward_rounded,
               onPressed: _submit,
+              isLoading: widget.isLoading,
+            ),
+            const SizedBox(height: 32),
+            Center(
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  Text(
+                    "Already have a workspace?",
+                    style: AppTextStyles.bodyMedium,
+                  ),
+                  TextButton(
+                    onPressed: widget.onSignInTap,
+                    child: Text(
+                      'Sign in',
+                      style: AppTextStyles.bodyMedium.copyWith(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

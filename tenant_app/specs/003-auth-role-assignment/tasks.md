@@ -71,9 +71,9 @@
 
 ### Implementation for User Story 4
 
-- [ ] T020 [US4] Create `SignInPage` in `lib/features/auth/ui/pages/sign_in_page.dart` — form with email and password fields; validation; calls `AuthCubit.signIn()`; shows error for invalid credentials; routes to dashboard on success; link to signup page for new users
-- [ ] T021 [US4] Add sign-out functionality to `TenantDashboardPage` — sign-out button that calls `AuthCubit.signOut()` and routes back to sign-in page
-- [ ] T022 [US4] Update app routing in `lib/app.dart` — add sign-in page as default for unauthenticated users; handle `AuthCubit.onAuthStateChange` to auto-redirect on session expiry
+- [x] T020 [US4] Create `SignInPage` in `lib/features/auth/ui/pages/sign_in_page.dart` — form with email and password fields; validation; calls `AuthCubit.signIn()`; shows error for invalid credentials; routes to dashboard on success; link to signup page for new users
+- [x] T021 [US4] Add sign-out functionality to `TenantDashboardPage` — sign-out button that calls `AuthCubit.signOut()` and routes back to sign-in page
+- [x] T022 [US4] Update app routing in `lib/app.dart` — add sign-in page as default for unauthenticated users; handle `AuthCubit.onAuthStateChange` to auto-redirect on session expiry
 
 **Checkpoint**: User Stories 1 & 4 functional — both signup and returning sign-in work end-to-end
 

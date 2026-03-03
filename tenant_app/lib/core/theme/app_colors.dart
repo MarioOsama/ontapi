@@ -23,6 +23,8 @@ class AppColors {
 
   static const Color starWarning = Color(0xFFEAB308);
   static const Color success = Colors.green;
+  static const Color error = Color(0xFFEF4444);
+  static const Color errorLight = Color(0xFFFEE2E2);
 
   static const Color avatarBgDark = Color(0xFF334155);
 }

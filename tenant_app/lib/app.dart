@@ -10,7 +10,7 @@ import 'features/auth/data/models/app_user.dart';
 import 'features/auth/data/repositories/auth_repository.dart';
 import 'features/auth/logic/auth_cubit.dart';
 import 'features/auth/logic/auth_state.dart';
-import 'features/auth/ui/pages/sign_up_page.dart';
+import 'features/auth/ui/pages/sign_in_page.dart';
 import 'features/auth/ui/pages/tenant_dashboard_page.dart';
 
 class App extends StatelessWidget {
@@ -83,7 +83,7 @@ class AuthWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
-        if (state is AuthInitial || state is AuthLoading) {
+        if (state is AuthInitial) {
           return const Scaffold(
             body: Center(child: CircularProgressIndicator()),
           );
@@ -101,7 +101,7 @@ class AuthWrapper extends StatelessWidget {
           );
         } else {
           // AuthUnauthenticated or AuthError
-          return const SignUpPage();
+          return SignInPage();
         }
       },
     );

@@ -58,7 +58,18 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> signIn({required String email, required String password}) async {
-    // Will be implemented in US4 / Phase 4
+    emit(AuthLoading());
+    try {
+      final user = await _authRepository.signIn(
+        email: email,
+        password: password,
+      );
+      emit(AuthAuthenticated(user));
+    } on AuthException catch (e) {
+      emit(AuthError(e.message));
+    } catch (e) {
+      emit(AuthError(e.toString()));
+    }
   }
 
   Future<void> signOut() async {

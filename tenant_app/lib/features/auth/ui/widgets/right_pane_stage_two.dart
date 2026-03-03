@@ -10,12 +10,18 @@ import '../../logic/auth_cubit.dart';
 import 'auth_header.dart';
 import 'auth_input_field.dart';
 import 'auth_primary_button.dart';
+
 class RightPaneStageTwo extends StatefulWidget {
   final String email;
   final String password;
+  final bool isLoading;
 
   const RightPaneStageTwo({
-    super.key,required this.email, required this.password});
+    super.key,
+    required this.email,
+    required this.password,
+    this.isLoading = false,
+  });
 
   @override
   State<RightPaneStageTwo> createState() => RightPaneStageTwoState();
@@ -171,6 +177,7 @@ class RightPaneStageTwoState extends State<RightPaneStageTwo> {
               text: 'Finish Setup',
               icon: Icons.check_circle_outline,
               onPressed: _submit,
+              isLoading: widget.isLoading,
             ),
             const SizedBox(height: 24),
             Center(
@@ -196,4 +203,3 @@ class RightPaneStageTwoState extends State<RightPaneStageTwo> {
     );
   }
 }
-

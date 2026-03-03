@@ -4,10 +4,26 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../logic/auth_cubit.dart';
 import '../../logic/auth_state.dart';
 import '../widgets/left_pane.dart';
+import '../widgets/sign_in_right_pane.dart';
+
 import '../widgets/right_pane.dart';
 
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+class SignInPage extends StatefulWidget {
+  const SignInPage({super.key});
+
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  bool _isSignIn = true;
+
+  void _toggleView() {
+    setState(() {
+      _isSignIn = !_isSignIn;
+      context.read<AuthCubit>().setUnauthenticated();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +48,17 @@ class SignUpPage extends StatelessWidget {
                         flex: 6,
                         child: BlocBuilder<AuthCubit, AuthState>(
                           builder: (context, state) {
-                            return RightPane(
-                              isWide: isWide,
-                              onSignInTap: () {
-                                Navigator.pop(context);
-                              },
-                            );
+                            if (_isSignIn) {
+                              return SignInRightPane(
+                                isWide: isWide,
+                                onSignUpTap: _toggleView,
+                              );
+                            } else {
+                              return RightPane(
+                                isWide: isWide,
+                                onSignInTap: _toggleView,
+                              );
+                            }
                           },
                         ),
                       ),

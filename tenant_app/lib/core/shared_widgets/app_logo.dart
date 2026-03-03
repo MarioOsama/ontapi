@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 
-
 class AppLogo extends StatelessWidget {
-  const AppLogo({super.key});
+  const AppLogo({super.key, this.size = 32});
+
+  final double size;
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +14,7 @@ class AppLogo extends StatelessWidget {
         color: AppColors.primaryLight,
         borderRadius: BorderRadius.circular(16.0),
       ),
-      child: const Icon(Icons.hub_outlined, color: Colors.white, size: 32),
+      child: Icon(Icons.hub_outlined, color: Colors.white, size: size),
     );
   }
 }
-
